@@ -31,7 +31,29 @@ def formatar_brl(valor):
     return f"R$ {valor:,.2f}".replace(',', 'X').replace('.', ',').replace('X', '.')
 
 # --- INICIALIZAÇÃO DO APP ---
-app = Dash(__name__, update_title="Carregando...")
+app = Dash(__name__)
+app.index_string = '''
+<!DOCTYPE html>
+<html>
+    <head>
+        {%metas%}
+        <title>Portal de Desembolsos COPP</title>
+        {%favicon%}
+        {%css%}
+    </head>
+    <body>
+        {%app_entry%}
+        <footer>
+            {%config%}
+            {%scripts%}
+            {%renderer%}
+        </footer>
+    </body>
+</html>
+'''
+
+# ESSA LINHA É VITAL PARA A VERCEL
+server = app.server
 
 # Definição explícita (MUITO RECOMENDADO)
 app.title = "Portal de Desembolsos COPP"
